@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <title>XSS Examples</title>
+    <script type="text/javascript">
+      function call_php(event, url) {
+        event.preventDefault();
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "clean_db.php", true);
+        xhttp.onreadystatechange = function () {
+          if (xhttp.readyState == 4 && xhttp.status == 200) {
+            window.location.href = url;
+          }
+        };
+        xhttp.send();
+      }
+    </script>
   </head>
   <body>
     <div class="container">
@@ -22,6 +35,16 @@
           <li><a href="sxss/get/index.php">GET</a></li>
           <li><a href="sxss/post/index.php">POST</a></li>
           <li><a href="sxss/header/index.php">Header</a></li>
+          <li>
+            <a
+              href=""
+              class="clean"
+              onclick="call_php(event, this.href)"
+              style="color: black"
+            >
+              Clean Database
+            </a>
+          </li>
         </ul>
       </div>
       <div class="wrapper">
