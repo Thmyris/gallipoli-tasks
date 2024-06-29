@@ -1,0 +1,57 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+  font-size: 48px
+
+}
+
+#root, #__next {
+  isolation: isolate;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  margin: auto;
+  /* background-color: #f0f0f0; */
+  background-color: gray;
+}
+
+.wrapper {
+  margin: auto 15px;
+  padding: 15px;
+  flex-direction: column;
+  align-items: center;
+  border: solid 1px black;
+  border-radius: 5px;
+}
+
+li {
+  line-height: 1.5;
+
+}
+
+a {
+  text-decoration: none;
+  font-size: 32px;
+  color: black;
+}
