@@ -1,6 +1,5 @@
 <?php
-  $custom_header = "set";
-  header("Custom-Header: $custom_header");
+$user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +9,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
-  <title>Stored Header Injection</title>
+  <title>Stored XSS Header Injection</title>
 </head>
 
 <body>
@@ -21,11 +20,12 @@
       </h1>
     </div>
     <h1>Stored Header Injection</h1>
-    <?php  
+    <h4><?php echo $user_agent; ?> </h4>
+    <?php
     $servername = "localhost";
-    $username = "root";
+    $username = "ubuntu";
     $password = "Secret_Pass0!";
-    $dbname = "db_test";
+    $dbname = "xss_db";
 
     $conn = mysqli_connect($servername, $username, $password, $dbname);
 
@@ -33,11 +33,11 @@
       die("Connection failed: " . $conn->connect_error);
     }
 
-    if ($custom_header != "set") {
-      $sql = "INSERT INTO headers (header) VALUES ('$custom_header')";
+    if ($user_agent) {
+      $insert_query = "INSERT INTO headers (header) VALUES ('$user_agent')";
 
-      if (mysqli_query($conn, $sql)) {
-        echo "Success";
+      if (mysqli_query($conn, $insert_query)) {
+        echo "Data inserted success";
       } else {
         echo "Error: " . $conn->error;
       }
@@ -47,25 +47,25 @@
     <div>
       <?php
       $servername = "localhost";
-      $username = "root";
+      $username = "ubuntu";
       $password = "Secret_Pass0!";
-      $dbname = "db_test";
-
+      $dbname = "xss_db";
       $conn = mysqli_connect($servername, $username, $password, $dbname);
 
       if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
       }
 
-      $sql = "SELECT header FROM headers ORDER BY header DESC LIMIT 1;";
-      $result = mysqli_query($conn, $sql);
+      $select_query = "SELECT header FROM headers ORDER BY header;";
+      $result = mysqli_query($conn, $select_query);
 
       if (mysqli_num_rows($result) > 0) {
-        header("Custom-Header: $result");
-      } else {
-        header("Custom-Header: Not set");
+        while ($row = mysqli_fetch_assoc($result)) {
+          echo $row['header'] . "<br>";
+        }
       }
 
+      echo "mysql closing";
       mysqli_close($conn);
       ?>
     </div>
