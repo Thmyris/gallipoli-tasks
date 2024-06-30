@@ -19,7 +19,7 @@
     <h1>Stored XSS in GET Request</h1>
     <form action="" method="GET">
       <input type="text" name="input" required />
-      <input type="submit" value="Submit" />
+      <button type="submit">Submit</button>
     </form>
     <?php
     $servername = "localhost";

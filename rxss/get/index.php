@@ -16,7 +16,7 @@
     <h1>Reflected XSS in GET Request</h1>
     <form action="" method="GET">
       <input type="text" name="input" required />
-      <input type="submit" value="Submit" />
+      <button type="submit">Submit</button>
     </form>
     <div>
       <?php

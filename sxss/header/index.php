@@ -37,7 +37,7 @@ $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] :
       $insert_query = "INSERT INTO headers (header) VALUES ('$user_agent')";
 
       if (mysqli_query($conn, $insert_query)) {
-        echo "Data inserted success";
+        echo "Success";
       } else {
         echo "Error: " . $conn->error;
       }
@@ -65,7 +65,6 @@ $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] :
         }
       }
 
-      echo "mysql closing";
       mysqli_close($conn);
       ?>
     </div>

@@ -2,16 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>DOM-Based XSS Example</title>
+    <title>DOM Based XSS</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>DOM-Based XSS via Get Request Example Page</h1>
+	<div>
+	    <h1><a href="../../index.html" style="color: black">< Back </a></h1>
+      	</div>
         <p id="message"></p>
     </div>
     <script>
-        // Extract 'name' parameter from the URL and set it as the content of the <p> element
         var urlParams = new URLSearchParams(window.location.search);
         var name = urlParams.get('name');
         if (name !== null) {
