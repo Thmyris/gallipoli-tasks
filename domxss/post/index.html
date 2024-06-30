@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>DOM XSS in POST Request</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div>
+        <h1><a href="../../index.html" style="color: black">< Back </a></h1>
+      </div>
+      <h1>DOM Based XSS</h1>
+      <form id="form">
+        <input type="text" id="name" name="name" />
+        <button type="submit">Submit</button>
+      </form>
+      <div id="output"></div>
+    </div>
+
+    <script>
+      document
+        .getElementById("form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          var name = document.getElementById("name").value;
+          document.getElementById("output").innerHTML = name;
+        });
+    </script>
+  </body>
+</html>
