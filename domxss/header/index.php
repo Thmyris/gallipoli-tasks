@@ -6,19 +6,14 @@
 </head>
 <body>
     <h1>Welcome to the DOM-Based XSS Example Page</h1>
-    <p id="user-agent-message">
-        <?php
-        // Get the User-Agent header and print it inside the <p> element
-        $userAgent = $_SERVER['HTTP_USER_AGENT'];
-        echo "Hello! Your 'user-agent' is: " . $userAgent;
-        ?>
-    </p>
-    <p id="referer-message">
-        <?php
-        // Get the Referer header and print it inside the <p> element
-        $referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'null';
-        echo "Hello! Your 'referer' is: " . $referer;
-        ?>
-    </p>
+    <p id="user-agent-message">Hello! Your 'user-agent' is: null</p>
+    <p id="referer-message">Hello! Your 'referer' is: null</p>
+    <script>
+        // Get the User-Agent and Referer headers and set them as the content of the <p> elements
+        var userAgent = '<?php echo $_SERVER['HTTP_USER_AGENT']; ?>';
+        var referer = '<?php echo isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'null'; ?>';
+        document.getElementById('user-agent-message').innerHTML = "Hello! Your 'user-agent' is: " + userAgent;
+        document.getElementById('referer-message').innerHTML = "Hello! Your 'referer' is: " + referer;
+    </script>
 </body>
 </html>
