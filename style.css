@@ -24,8 +24,9 @@ p, h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
-.container {
+.container-wrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -33,6 +34,22 @@ p, h1, h2, h3, h4, h5, h6 {
   margin: auto;
   /* background-color: #f0f0f0; */
   background-color: gray;
+
+
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 100vh; */
+  /* width: 100vw; */
+  margin: auto;
+  /* background-color: #f0f0f0; */
+  /* background-color: gray; */
 }
 
 .wrapper {
@@ -57,4 +74,8 @@ a {
 
 .clean {
   font-size: 1rem;
+}
+
+footer > p {
+  font-size: 0.1rem;
 }
