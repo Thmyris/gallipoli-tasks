@@ -2,21 +2,33 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>DOM XSS Example</title>
-    <script>
-      // This script reads the 'name' parameter from the URL and writes it to the page
-      function displayUserName() {
-        // Get the 'name' parameter from the URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const name = urlParams.get("name");
-
-        // Display the name in the 'greeting' div
-        document.getElementById("greeting").innerHTML = "Hello, " + name;
-      }
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>DOM XSS in GET Request</title>
   </head>
-  <body onload="displayUserName()">
-    <h1>Welcome to My Website</h1>
-    <div id="greeting"></div>
+
+  <body>
+    <div class="container">
+      <div>
+        <h1><a href="../../index.html" style="color: black">< Back </a></h1>
+      </div>
+      <h1>DOM Based XSS</h1>
+      <form id="searchForm">
+        <input type="text" id="query" name="query" />
+        <button type="submit">Search</button>
+      </form>
+      <div id="results"></div>
+    </div>
+
+    <script>
+      document
+        .getElementById("searchForm")
+        .addEventListener("submit", (event) => {
+          event.preventDefault();
+          var query = document.getElementById("query").value;
+          document.getElementById("results").innerHTML =
+            "You searched for: " + query;
+        });
+    </script>
   </body>
 </html>
