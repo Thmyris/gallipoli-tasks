@@ -2,9 +2,9 @@
 function clean_db()
 {
   $servername = "localhost";
-  $username = "root";
-  $password = "mysqlpass";
-  $dbname = "db_test";
+  $username = "ubuntu";
+  $password = "Secret_Pass0!";
+  $dbname = "xss_db";
 
   $conn = mysqli_connect($servername, $username, $password, $dbname);
 
