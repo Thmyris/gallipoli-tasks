@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>DOM-Based XSS Example</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Welcome to the DOM-Based XSS Example Page</h1>
-    <p id="message">Hello!, your 'name' is: null</p>
+    <div class="container">
+        <h1>DOM-Based XSS via Get Request Example Page</h1>
+        <p id="message"></p>
+    </div>
     <script>
         // Extract 'name' parameter from the URL and set it as the content of the <p> element
         var urlParams = new URLSearchParams(window.location.search);
         var name = urlParams.get('name');
-        if (name) {
+        if (name !== null) {
             document.getElementById('message').innerHTML = "Hello!, your 'name' is: " + name;
         }
     </script>
 </body>
 </html>
+
