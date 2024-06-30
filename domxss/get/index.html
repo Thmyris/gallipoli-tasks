@@ -1,34 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>DOM XSS in GET Request</title>
-  </head>
-
-  <body>
-    <div class="container">
-      <div>
-        <h1><a href="../../index.html" style="color: black">< Back </a></h1>
-      </div>
-      <h1>DOM Based XSS</h1>
-      <form id="searchForm">
-        <input type="text" id="query" name="query" />
-        <button type="submit">Search</button>
-      </form>
-      <div id="results"></div>
-    </div>
-
+<head>
+    <meta charset="UTF-8">
+    <title>DOM-Based XSS Example</title>
+</head>
+<body>
+    <h1>Welcome to the DOM-Based XSS Example Page</h1>
+    <p id="message">Hello!, your 'name' is: null</p>
     <script>
-      document
-        .getElementById("searchForm")
-        .addEventListener("submit", (event) => {
-          event.preventDefault();
-          var query = document.getElementById("query").value;
-          document.getElementById("results").innerHTML =
-            "You searched for: " + query;
-        });
+        // Extract 'name' parameter from the URL and set it as the content of the <p> element
+        var urlParams = new URLSearchParams(window.location.search);
+        var name = urlParams.get('name');
+        if (name) {
+            document.getElementById('message').innerHTML = "Hello!, your 'name' is: " + name;
+        }
     </script>
-  </body>
+</body>
 </html>
