@@ -5,56 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <title>XSS Examples</title>
-    <script type="text/javascript">
-      function call_php(event, url) {
-        event.preventDefault();
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("GET", "clean_db.php", true);
-        xhttp.onreadystatechange = function () {
-          if (xhttp.readyState == 4 && xhttp.status == 200) {
-            window.location.href = url;
-          }
-        };
-        xhttp.send();
-      }
-    </script>
-  </head>
   <body>
     <div class="container-wrapper">
       <div class="container">
         <div class="wrapper">
-          <h1>Reflected XSS</h1>
-          <ul>
-            <li><a href="rxss/get/index.php">GET</a></li>
-            <li><a href="rxss/post/index.php">POST</a></li>
-            <li><a href="rxss/header/index.php">Header</a></li>
-          </ul>
+		<h1><a href="task1/index.html">XSS Task 1</a></h1>
         </div>
         <div class="wrapper">
-          <h1>Stored XSS</h1>
-          <ul>
-            <li><a href="sxss/get/index.php">GET</a></li>
-            <li><a href="sxss/post/index.php">POST</a></li>
-            <li><a href="sxss/header/index.php">Header</a></li>
-            <li>
-              <a
-                href=""
-                class="clean"
-                onclick="call_php(event, this.href)"
-                style="color: black"
-              >
-                Clean Database
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="wrapper">
-          <h1>DOM XSS</h1>
-          <ul>
-            <li><a href="domxss/get/index.html">GET</a></li>
-            <li><a href="domxss/post/index.html">POST</a></li>
-            <li><a href="domxss/header/index.php">Header</a></li>
-          </ul>
+		<h1><a href="task2/index.html">XSS Task 2</a></h1>
         </div>
       </div>
       <footer>
