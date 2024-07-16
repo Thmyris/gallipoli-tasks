@@ -8,13 +8,8 @@
 <body>
     <div class="container">
 	<div>
-	    <h1><a href="../index.html" style="color: black">< Back </a></h1>
-      	</div>
+        <h1><a href="../index.html" style="color: black">< Back </a></h1>
+        </div>
     </div>
-    
-    
-
-
 </body>
 </html>
-
