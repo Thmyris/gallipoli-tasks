@@ -15,74 +15,92 @@
           < Back </a>
       </h1>
     </div>
+
+    <?php 
+      $params = $_GET;
+    ?>
+
     <form action="" method="GET">
       <input type="text" name="inputB64" required />
       <button type="submit">Base64</button>
     </form>
-
     <?php
-    $params = $_GET;
-
+    # b64 encoded : PHNjcmlwdD5hbGVydCgpPC9zY3JpcHQ+
     if (isset($params['inputB64'])) {
-      $encodedInput = $params['inputB64'];
-      $decodedInput = base64_decode($encodedInput);
-      echo "<p style='display: none;'>" . $decodedInput . "</p>";
+      $b64decoded = base64_decode($params['inputB64']);
+      echo "<p style='display: none;'>" . $b64decoded . "</p>";
     }
     ?>
 
     <br>
+    <hr>
     <form action="" method="GET">
       <input type="text" name="inputURL" required />
       <button type="submit">URL Encode</button>
     </form>
     <?php
+    # url encoded : %3Cscript%3Ealert()%3C/script%3E
     if (isset($params['inputURL'])) {
-        $encodedInput = $params['inputURL'];
-        $decodedInput = urldecode($encodedInput);
-        echo "<p style='display: none;'>" . $decodedInput . "</p>";
+        $urldecoded = urldecode($params['inputURL']);
+        echo "<p style='display: none;'>" . $urldecoded . "</p>";
     }
     ?>
-    
+
     <br>
+    <hr>
     <form action="" method="GET">
       <input type="text" name="inputHTML" required />
       <button type="submit">HTML Encode</button>
     </form>
     <?php
+    # html encoded : &lt;script&gt;alert()&lt;/script&gt;
     if (isset($params['inputHTML'])) {
-      $encodedInput = $params['inputHTML'];
-        $decodedInput = htmlspecialchars_decode($encodedInput, ENT_QUOTES);
-        echo "<p style='display: none;'>" . $decodedInput . "</p>";
+        $htmldecoded = html_entity_decode($params['inputHTML'], ENT_QUOTES | ENT_HTML5);
+        echo "<p style='display: none;'>" . $htmldecoded . "</p>";
     }
     ?>
 
     <br>
+    <hr>
     <form action="" method="GET">
       <input type="text" name="inputB64HTML" required />
       <button type="submit">Base64 & HTML Encode</button>
     </form>
     <?php
+    # html & b64 encoded : Jmx0O3NjcmlwdCZndDthbGVydCZscGFyOyZycGFyOyZsdDsmc29sO3NjcmlwdCZndDs=
     if (isset($params['inputB64HTML'])) {
-      $encodedInput = $params['inputB64HTML'];
-      $decodedInput = base64_decode(htmlspecialchars_decode($encodedInput, ENT_QUOTES));
-      echo "You entered: " . $decodedInput;
+      $b64htmldecoded = html_entity_decode(base64_decode($params['inputB64HTML']), ENT_QUOTES | ENT_HTML5);
+      echo "<p style='display: none;'>" . $b64htmldecoded . "</p>";
     }
     ?>
 
     <br>
+    <hr>
     <form action="" method="GET">
       <input type="text" name="inputB64URL" required />
       <button type="submit">Base64 & URL Encode</button>
     </form>
     <?php
+    # url & base64 encoded : JTNDc2NyaXB0JTNFYWxlcnQoKSUzQy9zY3JpcHQlM0U=
     if (isset($params['inputB64URL'])) {
-        $encodedInput = $params['inputB64URL'];
+        $b64urldecoded = urldecode(base64_decode($params['inputB64URL']));
+        echo "<p style='display: none;'>" . $b64urldecoded . "</p>"; 
+    }
+    ?>
 
-        $decodedInput = base64_decode(urldecode($encodedInput));
-        echo "Decoded input: " . $decodedInput;
+    <br>
+    <hr>
+    <form action="" method="GET">
+      <input type="text" name="inputHTML4URL" required />
+      <button type="submit">HTML & URL Encode</button>
+    </form>
+    <?php
+    # html & url encoded : &percnt;3Cscript&percnt;3Ealert&lpar;&rpar;&percnt;3C&sol;script&percnt;3E
+    if (isset($params['inputHTML4URL'])) {
+      $htmlurldecoded = urldecode(html_entity_decode($params['inputHTML4URL'], ENT_QUOTES | ENT_HTML5));
+      echo "<p style='display: none;'>" . $htmlurldecoded . "</p>";
     }
     ?>
 
 </body>
-
 </html>
