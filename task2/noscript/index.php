@@ -16,12 +16,17 @@
         <button type="submit">Submit</button>
     </form>
     <div>
-        <noscript>
-        <?php       # </noscript><script>alert()</script>
-            $userInput = isset($_GET['message']) ? $_GET['message'] : '';
+        <?php   # <link rel="stylesheet" href="http://evil.com/malicious.js">
+                # <link rel="stylesheet" href="http://evil.com/malicious.css">  //  @import 'javascript:alert("XSS")';
+
+            function filter($input) {
+                $filtered = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $input);
+                $filtered = str_replace(['iframe', 'eval', 'onmouseover', 'img', 'textarea', 'onclick', 'svg', 'onload'], '', $filtered);
+                return $filtered;
+            }
+            $userInput = filter(isset($_GET['message']) ? $_GET['message'] : '');
             echo $userInput;
         ?>
-        </noscript>
     </div>
 </body>
 </html>
