@@ -31,11 +31,11 @@
         <hr>
         <br>";
 
-        # base64 png escape payload:Ij48aW1nIHNyYz14IG9uZXJyb3I9YWxlcnQoJ1hTUycpPg==
-        echo "<p>base64 png : </p>
-        <img src=\"data:image/png;base64," . $userInput . "\">
-        <hr>
-        <br>";
+        // # base64 png escape payload:Ij48aW1nIHNyYz14IG9uZXJyb3I9YWxlcnQoJ1hTUycpPg==
+        // echo "<p>base64 png : </p>
+        // <img src=\"data:image/png;base64," . $userInput . "\">
+        // <hr>
+        // <br>";
 
         # onload : %22+onload=%22alert()
         echo "<p>Svg height: </p>
@@ -47,7 +47,7 @@
 
         # double encode: %2522%2520onloadstart=%2522alert()
         echo "<p>Double encoded payload girer misin karşim?</p>
-        <audio src=\"" . $ddecoded . "\" autoplay></audio>
+        <video src=\"" . $ddecoded . "\" autoplay></video>
         <hr>
         <br>";
 
