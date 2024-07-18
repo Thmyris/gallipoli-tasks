@@ -19,8 +19,10 @@
       <?php
         $userInput = isset($_GET['input']) ? $_GET['input'] : '';
 
+        
         echo "<h2>XSS Payloads</h2><br><hr>";
-
+        
+        echo "<p><strong>NOT:</strong>Event handlerlarda yaptigimiz url encoding, b64 encoding taktikleriyle burdaki tagleri payloadlara unique hale getirme islemi yetismedi. Atlandi.</p><br>";
 
         echo "<p> <strong>1. a href with mailto:\$userInput url scheme written inside</strong></p><br>";
         //someone@example.com?subject=Hello&body=><script>alert('XSS')</script>

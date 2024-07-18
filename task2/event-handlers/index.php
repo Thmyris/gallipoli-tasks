@@ -52,9 +52,7 @@
         <br>";
 
         # vur.mp3" onplay="alert()"
-        echo "<p>dinlemek istediginiz mehteri inputa giriniz:
-        kayitli mehterler
-        vur.mp3 x.mp3</p>
+        echo "<p>Dinlemek istediginiz mp3 ismini inputa giriniz. Kayitli mp3ler: `vur.mp3` `ced.mp3`</p>
         <audio src=\"" . $userInput . "\" autoplay></audio>
         <hr>
         <br>";
