@@ -1,6 +1,3 @@
-<?php
-  $userInput = isset($_GET['input']) ? $_GET['input'] : '';
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +16,8 @@
     </form>
     <div>
     <?php
+      $userInput = isset($_GET['input']) ? $_GET['input'] : '';
+
       function filter1($input) {
         $filtered = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $input);
         $filtered = preg_replace('/on\w+\s*=\s*"(?:.|\n)*?"/i', '', $filtered);
@@ -30,7 +29,7 @@
       function echo1($str) {
         echo filter1($str);
       }
-        echo "<p>1 " .  echo1($userInput) . "</p>";
+        echo "<p>1 " .  htmlspecialchars(echo1($userInput)) . "</p>";
       ?>
     </div>
     <div>
@@ -59,10 +58,7 @@
         $filtered = str_replace(['iframe', 'eval', 'onload', 'onmouseover'], '', $filtered);
         return $filtered;
       }
-      function echo3($str) {
-        echo filter3($str);
-      }
-        echo "<p>3 " .  echo3($userInput) . "</p>";
+        echo "<p style=\"font-size:30px;color:" . filter3($userInput) . ";\">set font color!</p>";
     ?>
     </div>
 </body>
