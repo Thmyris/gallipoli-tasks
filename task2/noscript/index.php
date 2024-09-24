@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comment Page</title>
+    <title>NoScript XSS</title>
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -13,9 +13,15 @@
     <h1>Leave a Comment</h1>
     <form id="commentForm">
         <textarea id="commentInput" placeholder="Enter your comment here" rows="10" cols="50"></textarea>
+        <br>
         <button type="submit">Submit</button>
     </form>
     <div id="comments">
+    </div>
+
+    <hr>
+    <div>
+        <h1><a href="./canonical.php">Canonical Link Page</a></h1>
     </div>
 
     <script>
